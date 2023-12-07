@@ -18,11 +18,10 @@ spec:
         app: flaskdemo
     spec:
       containers:
-      - image: karthikparthiban/test:4
+      - image: karthikparthiban/test:latest
         name: flaskdemo
         resources: {}
 status: {}
-
 ---
 apiVersion: v1
 kind: Service
@@ -31,11 +30,9 @@ metadata:
   labels:
     app: lb-service
 spec:
+  type: LoadBalancer
   ports:
-  - name: http
-    protocol: TCP
-    port: 80
+  - port: 80
     targetPort: 5000
   selector:
     app: flaskdemo
-  type: LoadBalancer
